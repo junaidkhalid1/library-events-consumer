@@ -28,7 +28,8 @@ public class LibraryEventsConsumerConfig {
         ConcurrentKafkaListenerContainerFactory<Object, Object> factory = new ConcurrentKafkaListenerContainerFactory();
         configurer.configure(factory, kafkaConsumerFactory
                 .getIfAvailable(() -> new DefaultKafkaConsumerFactory<>(this.kafkaProperties.buildConsumerProperties())));
-        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL); // To manually manage the offset
+        factory.setConcurrency(3); // 3 threads for same instance of kafkaListener
+        //factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL); // To manually manage the offset
         return factory;
     }
 }
