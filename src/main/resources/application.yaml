@@ -2,37 +2,79 @@ spring:
   profiles:
     active: local
 server:
-  port: 8091
+  port: 8081
 
 ---
 
 spring:
-  profiles: local
+  config:
+    activate:
+      on-profile: local
   kafka:
     consumer:
       bootstrap-servers: localhost:9092,localhost:9093,localhost:9094
       key-deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       group-id: library-events-listener-group
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    data-username: sa
+    data-password:
+  jpa:
+    database: h2
+    database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: true
+  h2:
+    console:
+      enabled: true
 
 ---
 
 spring:
-  profiles: preprod
+  config:
+    activate:
+      on-profile: preprod
   kafka:
     consumer:
       bootstrap-servers: localhost:9092,localhost:9093,localhost:9094
       key-deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       group-id: library-events-listener-group
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database: h2
+    database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: true
+  h2:
+    console:
+      enabled: true
 
 ---
 
 spring:
-  profiles: prod
+  config:
+    activate:
+      on-profile: prod
   kafka:
     consumer:
       bootstrap-servers: localhost:9092,localhost:9093,localhost:9094
       key-deserializer: org.apache.kafka.common.serialization.IntegerDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       group-id: library-events-listener-group
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    data-username: sa
+    data-password:
+  jpa:
+    database: h2
+    database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: true
+  h2:
+    console:
+      enabled: true
