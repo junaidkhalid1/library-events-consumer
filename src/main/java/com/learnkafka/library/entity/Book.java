@@ -15,7 +15,6 @@ import javax.persistence.*;
 public class Book {
 
     @Id
-    @GeneratedValue
     private Integer bookId;
     private String bookName;
     private String bookAuthor;
